@@ -27,5 +27,5 @@ jobs:
       - uses: ./
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          super-linter-yml-file: .github/workflows/update-gitleaks.yml
+          super-linter-yml-file: .github/workflows/super-linter.yml
           repo-name: ${{ github.event.pull_request.head.repo.full_name }}
