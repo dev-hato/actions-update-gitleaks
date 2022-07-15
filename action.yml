@@ -1,0 +1,63 @@
+name: 'update-gitleaks'
+author: 'dev-hato Development Team'
+description: 'gitleaksをアップデートする'
+inputs:
+  github-token: # id of input
+    description: 'GITHUB_TOKEN'
+    required: true
+  super-linter-yml-file:
+    description: 'YAML file name of super-linter'
+    required: true
+  repo-name:
+    description: 'Repository name'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Update .gitleaks.toml
+      shell: bash
+      run: |
+        version="$(grep super-linter '${{ inputs.super-linter-yml-file }}' | grep uses | sed -e 's/.*@//g')"
+        curl "https://raw.githubusercontent.com/github/super-linter/${version}/TEMPLATES/.gitleaks.toml" > .gitleaks.toml
+    - name: Update .pre-commit-config.yaml
+      uses: actions/github-script@v6.1.0
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs')
+          const yaml = require('js-yaml')
+          
+          const config_filename = '.pre-commit-config.yaml'
+          const config = yaml.load(fs.readFileSync(config_filename, 'utf8'))
+          const common_params = {
+              owner: 'zricethezav',
+              repo: 'gitleaks'
+          }
+          console.log("call repos.getLatestRelease:", common_params)
+          const latest_release = await github.rest.repos.getLatestRelease(
+                                   common_params
+                                 )
+          config.repos = config.repos.map(repo => {
+              let repo_name = 'https://github.com/'
+              repo_name += common_params.owner + '/' + common_params.repo
+          
+              if (repo.repo === repo_name) {
+                  repo.rev = latest_release.data.tag_name
+              }
+          
+              return repo;
+          })
+          const content = '---\n' + yaml.dump(config)
+          
+          try {
+              fs.writeFileSync(config_filename, content, 'utf8')
+          } catch (err) {
+              console.error(err.message)
+              process.exit(1)
+          }
+    - uses: dev-hato/actions-diff-pr-management@v0.0.8
+      with:
+        github-token: ${{ inputs.github-token }}
+        branch-name-prefix: fix-version-gitleaks
+        pr-title-prefix: gitleaksをアップデートしてあげたよ！
+        repo-name: ${{ inputs.repo-name }}
