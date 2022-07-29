@@ -55,7 +55,7 @@ runs:
               console.error(err.message)
               process.exit(1)
           }
-    - uses: dev-hato/actions-diff-pr-management@v0.0.10
+    - uses: dev-hato/actions-diff-pr-management@v0.0.11
       with:
         github-token: ${{ inputs.github-token }}
         branch-name-prefix: fix-version-gitleaks
