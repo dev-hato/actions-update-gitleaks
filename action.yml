@@ -25,7 +25,7 @@ runs:
         done
 
         curl "https://raw.githubusercontent.com/github/super-linter/${version}/TEMPLATES/.gitleaks.toml" > .gitleaks.toml
-        yq -i ".repos[].rev = \"$(docker run --rm -it --entrypoint gitleaks "github/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
+        yq -i ".repos[].rev = \"$(docker run --entrypoint gitleaks "github/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
     - uses: dev-hato/actions-diff-pr-management@v1.0.3
       with:
         github-token: ${{ inputs.github-token }}
