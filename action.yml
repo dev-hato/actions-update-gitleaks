@@ -5,9 +5,6 @@ inputs:
   github-token: # id of input
     description: 'GITHUB_TOKEN'
     required: true
-  super-linter-yml-file:
-    description: 'YAML file name of super-linter'
-    required: true
   repo-name:
     description: 'Repository name'
     required: true
@@ -17,7 +14,16 @@ runs:
     - name: Update .gitleaks.toml
       shell: bash
       run: |
-        version="$(grep super-linter '${{ inputs.super-linter-yml-file }}' | grep uses | sed -e 's/.*@//g')"
+        version=""
+
+        for f in $(find .github/workflows -type f); do
+          v="$(yq '.jobs.*.steps[].uses | select(. == "github/super-linter*")' "${f}" | sed -e 's/.*@//g')"
+          if [ -n "${v}" ]; then
+            version="${v}"
+            break
+          fi
+        done
+
         curl "https://raw.githubusercontent.com/github/super-linter/${version}/TEMPLATES/.gitleaks.toml" > .gitleaks.toml
     - name: Update .pre-commit-config.yaml
       uses: actions/github-script@v6.1.0
