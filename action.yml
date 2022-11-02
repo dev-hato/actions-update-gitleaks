@@ -13,19 +13,7 @@ runs:
   steps:
     - name: Update
       shell: bash
-      run: |
-        version=""
-
-        for f in $(find .github/workflows -type f); do
-          v="$(yq '.jobs.*.steps[].uses | select(. == "github/super-linter*")' "${f}" | sed -e 's/.*@//g')"
-          if [ -n "${v}" ]; then
-            version="${v}"
-            break
-          fi
-        done
-
-        curl "https://raw.githubusercontent.com/github/super-linter/${version}/TEMPLATES/.gitleaks.toml" > .gitleaks.toml
-        yq -i ".repos[].rev = \"$(docker run --entrypoint gitleaks "github/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
+      run: ${{ github.action_path }}/scripts/action/update.sh
     - uses: dev-hato/actions-diff-pr-management@v1.0.8
       with:
         github-token: ${{ inputs.github-token }}
