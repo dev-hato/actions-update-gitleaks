@@ -5,9 +5,6 @@ inputs:
   github-token: # id of input
     description: 'GITHUB_TOKEN'
     required: true
-  repo-name:
-    description: 'Repository name'
-    required: true
 runs:
   using: "composite"
   steps:
@@ -19,4 +16,3 @@ runs:
         github-token: ${{ inputs.github-token }}
         branch-name-prefix: fix-version-gitleaks
         pr-title-prefix: gitleaksをアップデートしてあげたよ！
-        repo-name: ${{ inputs.repo-name }}
