@@ -10,6 +10,7 @@ runs:
   steps:
     - name: Update
       shell: bash
+      if: github.event_name != 'pull_request' || github.event.action != 'closed'
       run: ${{ github.action_path }}/scripts/action/update.sh
     - uses: dev-hato/actions-diff-pr-management@v1.1.3
       with:
