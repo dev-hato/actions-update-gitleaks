@@ -11,4 +11,4 @@ while IFS= read -r -d '' f; do
 done < <(find .github/workflows -type f -print0)
 
 curl "https://raw.githubusercontent.com/super-linter/super-linter/${version}/TEMPLATES/.gitleaks.toml" >.gitleaks.toml
-yq -i ".repos[].rev = \"$(docker run --entrypoint gitleaks "super-linter/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
+yq -i ".repos[].rev = \"$(docker run --entrypoint gitleaks "ghcr.io/super-linter/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
