@@ -3,7 +3,7 @@
 version=""
 
 while IFS= read -r -d '' f; do
-  v="$(yq '.jobs.*.steps[].uses | select(. == "super-linter/super-linter*")' "${f}" | sed -e 's/.*@//g')"
+  v="$(yq '.jobs.*.steps[].uses | select(. == "super-linter/super-linter*") | . + " # " + line_comment' "${f}" | sed -e 's/.*@//g')"
   if [ -n "${v}" ]; then
     if [[ "${v}" == *" # v"* ]]; then
         v="${v#* # }"
