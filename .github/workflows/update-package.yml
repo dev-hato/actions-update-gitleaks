@@ -23,13 +23,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v4.0.1
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4.0.1
         if: github.event_name != 'pull_request' || github.event.action != 'closed'
         with:
           cache: npm
       - if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: npm install
-      - uses: dev-hato/actions-diff-pr-management@v1.1.9
+      - uses: dev-hato/actions-diff-pr-management@5679ec25fa1bcedddc567859b30193a724bc968e # v1.1.9
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           branch-name-prefix: fix-package
