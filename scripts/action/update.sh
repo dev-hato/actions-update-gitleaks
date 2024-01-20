@@ -5,7 +5,7 @@ version=""
 while IFS= read -r -d '' f; do
   v="$(yq '.jobs.*.steps[].uses | select(. == "super-linter/super-linter*")' "${f}" | sed -e 's/.*@//g')"
   if [[ "${v}" == *" # v"* ]]; then
-      v=$(echo "${v}" | sed -e 's/.* # //g')
+      v="${v#* # }"
   fi
   if [ -n "${v}" ]; then
     version="${v}"
