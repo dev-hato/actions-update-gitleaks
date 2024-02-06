@@ -18,6 +18,10 @@ on:
     branches:
       - main
   pull_request:
+permissions:
+  contents: read
+  packages: read
+  statuses: write
 ###############
 # Set the Job #
 ###############
@@ -48,9 +52,10 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@a8150b40c89574adb5f68bf9502b890a236a06b3 # v5.7.2
+        uses: super-linter/super-linter/slim@ff5037c06042e564803502feb97f8a686f3b0171 # v6.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
           LINTER_RULES_PATH: .
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
