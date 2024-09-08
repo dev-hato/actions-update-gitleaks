@@ -1,9 +1,9 @@
-name: 'update-gitleaks'
-author: 'dev-hato Development Team'
-description: 'gitleaksをアップデートする'
+name: "update-gitleaks"
+author: "dev-hato Development Team"
+description: "gitleaksをアップデートする"
 inputs:
   github-token: # id of input
-    description: 'GITHUB_TOKEN'
+    description: "GITHUB_TOKEN"
     required: true
 runs:
   using: "composite"
