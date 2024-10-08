@@ -14,7 +14,7 @@ jobs:
   create-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: dev-hato/actions-create-release@1b9d184f377bad9083e981046734deacf1982ee0 # v0.0.37
+      - uses: dev-hato/actions-create-release@c2a40c5aa1affd28467f9d85ab21730396b96167 # v0.0.38
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
 concurrency:
