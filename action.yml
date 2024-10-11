@@ -12,7 +12,7 @@ runs:
       shell: bash
       if: github.event_name != 'pull_request' || github.event.action != 'closed'
       run: ${{ github.action_path }}/scripts/action/update.sh
-    - uses: dev-hato/actions-diff-pr-management@7cc8ab103917849f6995064afae9f4cbcfd009ae # v1.1.13
+    - uses: dev-hato/actions-diff-pr-management@e5c78b251a69f44f93b2f1398e06b129bcf151ec # v1.2.0
       with:
         github-token: ${{ inputs.github-token }}
         branch-name-prefix: fix-version-gitleaks
