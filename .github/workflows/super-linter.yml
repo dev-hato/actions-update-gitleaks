@@ -58,6 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
           LINTER_RULES_PATH: .
+          FILTER_REGEX_EXCLUDE: /node_modules/.*
           VALIDATE_GIT_COMMITLINT: false
           VALIDATE_BIOME_FORMAT: false
 concurrency:
