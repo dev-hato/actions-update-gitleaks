@@ -28,6 +28,7 @@ jobs:
         if: github.event_name != 'pull_request' || github.event.action != 'closed'
         with:
           cache: npm
+          node-version-file: .node-version
       - if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: npm install
       - uses: dev-hato/actions-diff-pr-management@bda458eb55c11585595482e3ec7506b05632b5ec # v2.2.1
