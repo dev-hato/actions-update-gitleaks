@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 npm ci
 action_version="$(yq '.jobs.build.steps[-1].uses | line_comment' .github/workflows/super-linter.yml)"
