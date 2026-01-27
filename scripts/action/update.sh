@@ -20,5 +20,4 @@ if [ -z "${version}" ]; then
 	exit 1
 fi
 
-curl "https://raw.githubusercontent.com/super-linter/super-linter/${version}/TEMPLATES/.gitleaks.toml" >.gitleaks.toml
 yq -i ".repos[].rev = \"$(docker run --entrypoint gitleaks "ghcr.io/super-linter/super-linter:slim-${version}" version | sed -e 's/\r//g')\"" .pre-commit-config.yaml
