@@ -19,7 +19,7 @@ jobs:
         with:
           client-id: ${{ secrets.PROJECT_AUTOMATION_APP_CLIENT_ID }} # zizmor: ignore[secrets-outside-env]
           private-key: ${{ secrets.PROJECT_AUTOMATION_PRIVATE_KEY }} # zizmor: ignore[secrets-outside-env]
-      - uses: dev-hato/actions-add-to-projects@cd9c0d86d790de6192408df5e71523cab645e9c1 # v1.0.3
+      - uses: dev-hato/actions-add-to-projects@a54f146fe2a9f5fb161535cc38ebf78cdc078366 # v1.0.4
         with:
           github-token: ${{steps.generate_token.outputs.token}}
           project-url: https://github.com/orgs/dev-hato/projects/1
