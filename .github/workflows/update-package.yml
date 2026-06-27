@@ -15,6 +15,7 @@ permissions:
   pull-requests: write
 jobs:
   # npm installを実行し、package.jsonやpackage-lock.jsonに差分があればPRを作る
+  # jscpd:ignore-start
   update-package:
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +30,7 @@ jobs:
         with:
           cache: npm
           node-version-file: .node-version
+      # jscpd:ignore-end
       - if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: npm install
       - uses: dev-hato/actions-diff-pr-management@5cd3792bc98beed11cda90898bc81af6bfa199af # v2.2.5
