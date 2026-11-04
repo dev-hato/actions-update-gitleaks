@@ -5,7 +5,7 @@ version: 'v0.0.3'
 workflows:
     '.github/workflows/add-to-task-list.yml':
         - 'actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510'
-        - 'dev-hato/actions-add-to-projects@92fcc876479a4e7bc33cc182484360f1ba188159'
+        - 'dev-hato/actions-add-to-projects@8c1169d928e375602b9f6f5061fe490f21672ffb'
     '.github/workflows/create-release.yml':
         - 'dev-hato/actions-create-release@03c4598c582878251cc2808a2bb8d89d4d8fbb94'
     '.github/workflows/format-json-yml.yml':
@@ -56,9 +56,9 @@ dependencies:
         commit: 'sha1-949feb2413d6458794dcd2491c4babbbce0c15c1'
         owner_id: 44036562
         repo_id: 189476904
-    'dev-hato/actions-add-to-projects@92fcc876479a4e7bc33cc182484360f1ba188159':
-        ref: 'v1.0.10'
-        commit: 'sha1-92fcc876479a4e7bc33cc182484360f1ba188159'
+    'dev-hato/actions-add-to-projects@8c1169d928e375602b9f6f5061fe490f21672ffb':
+        ref: 'v1.0.12'
+        commit: 'sha1-8c1169d928e375602b9f6f5061fe490f21672ffb'
         owner_id: 68012105
         repo_id: 526394375
         uses:
