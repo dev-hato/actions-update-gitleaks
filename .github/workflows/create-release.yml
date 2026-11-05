@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: dev-hato/actions-create-release@03c4598c582878251cc2808a2bb8d89d4d8fbb94 # v0.0.59
+      - uses: dev-hato/actions-create-release@c133eca28656c865095cec86897ae96238a4bbfb # v0.0.60
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
 concurrency:
