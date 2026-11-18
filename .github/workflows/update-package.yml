@@ -37,6 +37,7 @@ jobs:
         uses: flatt-security/setup-takumi-guard-npm@14f07d0cbc739b42a1b7c70a04c2b84cd1318ddd # v1.4.0
       - if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: npm install
+      # jscpd:ignore-start
       # 修正PRの操作はpushとフォーク以外からのpull_requestのみで行う。それ以外のイベントでは差分の検証のみを行うため、書き込み用のトークンは発行しない
       # フォークからのPRでは、修正PRを操作せずに差分の検証のみを行う
       - name: Generate a token
@@ -49,6 +50,7 @@ jobs:
           permission-contents: write
           permission-pull-requests: write
           permission-workflows: write
+      # jscpd:ignore-end
       - uses: dev-hato/actions-diff-pr-management@474e401b8a7df75f1c804a60aa987140c1e0548c # v2.5.0
         with:
           github-token: ${{ steps.generate_token.outputs.token || github.token }}
